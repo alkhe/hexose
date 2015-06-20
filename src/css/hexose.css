@@ -41,7 +41,7 @@ html, body {
 	background: #333;
 }
 
-.field * {
+.editor * {
 	font-family: 'Oxygen Mono';
 }
 
@@ -50,23 +50,36 @@ html, body {
 }
 
 .addrfield {
-	background: yellow;
+	display: inline-block;
+	background: #0f232e;
+}
+
+.addrfield div {
+	margin: 0 5px 0 5px;
+	color: #3f535e;
 }
 
 .hexfield {
-	background: red;
+	display: inline-block;
+	background: #173345;
 }
 
 .ascfield {
-	background: purple;
+	display: inline-block;
+	background: #1b3e50;
 }
 
-.octet {
+.hexfield span, .ascfield span {
+	display: inline-block;
 	text-align: center;
-	width: 2em;
+	margin: 0 5px 0 5px;
 }
 
-.ascii {
-	text-align: center;
-	width: 1em;
+.hexfield span {
+	color: #678395;
+}
+
+.ascfield span {
+	min-width: 1em;
+	color: #7b9eb0;
 }

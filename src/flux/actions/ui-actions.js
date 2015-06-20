@@ -8,7 +8,7 @@ let Dialog = Remote.require('dialog'),
 
 export default class extends Actions {
 	loadFile() {
-		let prom = new Promise((resolve, reject) => {
+		return new Promise((resolve, reject) => {
 			Dialog.showOpenDialog({
 				title: 'Open File',
 				properties: ['openFile'],
@@ -20,7 +20,6 @@ export default class extends Actions {
 				});
 			});
 		});
-		return prom;
 	}
 	saveFile() {
 		let { filename, file } = flux.getStore('UI').state;

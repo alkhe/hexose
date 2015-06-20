@@ -6,26 +6,26 @@ export default class extends React.Component {
 		let { file } = this.props;
 
 		if (file) {
-			let offset = 0;
-			let width = 16;
-			let height = 16;
+			let offset = 0,
+				width = 16,
+				height = 16;
 
-			let rows = [];
+			let addrs = [],
+				hexrows = [],
+				ascrows = [];
 
-			let maxaddr = offset + width * height;
+			let maxaddr = offset + width * height,
+				addrwidth = (maxaddr - 1).toString(16).length;
+
 			let buf = file.slice(offset, maxaddr);
-			let addrwidth = (maxaddr - 1).toString(16).length;
 
 			for (let i = 0; i < height; i++) {
-				let row = [];
-				let ascrow = [];
 				let rel = i * width;
 
-				row.push(
-					<div className='address'>
-						{ _.padLeft((offset + rel).toString(16).toUpperCase(), addrwidth, '0') }
-					</div>
-				);
+				addrs.push(<div>{ _.padLeft((offset + rel).toString(16).toUpperCase(), addrwidth, '0') }</div>);
+
+				let hexrow = [];
+				let ascrow = [];
 
 				for (let j = 0; j < width; j++) {
 					let n = buf[rel + j];
@@ -34,75 +34,27 @@ export default class extends React.Component {
 						h = '0' + h;
 					}
 
-					row.push(
-						<div className='octet'>
-							{ h }
-						</div>
-					);
-
-					ascrow.push(
-						<div className='ascii'>
-							{ String.fromCharCode(n) }
-						</div>
-					);
+					hexrow.push(<span>{ h }</span>);
+					ascrow.push(<span>{ String.fromCharCode(n) }</span>);
 				}
 
-				rows.push(
-					<div className='row'>
-						{ row }{ ascrow }
-					</div>
-				);
+				hexrows.push(<div>{ hexrow }</div>);
+				ascrows.push(<div>{ ascrow }</div>);
 			}
 
 			return (
-				<div className='field'>
-					{ rows }
+				<div className='editor'>
+					<div className='addrfield'>
+						{ addrs }
+					</div>
+					<div className='hexfield'>
+						{ hexrows }
+					</div>
+					<div className='ascfield'>
+						{ ascrows }
+					</div>
 				</div>
 			);
-
-			// let hexrows = [];
-			// let ascrows = [];
-			//
-			// let buf = file.slice(offset, offset + 256);
-			//
-			// for (let i = 0; i < buf.length; i++) {
-			// 	let n = buf[i];
-			// 	let h = n.toString(16);
-			// 	if (h.length == 1) {
-			// 		h = '0' + h;
-			// 	};
-			// 	hexrows.push(
-			// 		<div className='octet'>
-			// 			{ h.toUpperCase() }
-			// 		</div>
-			// 	);
-			// 	ascrows.push(
-			// 		<div className='ascii'>
-			// 			{ String.fromCharCode(n) }
-			// 		</div>
-			// 	);
-			// }
-			//
-			// return (
-			// 	<div>
-			// 		<div className='hexfield'>
-			// 			{ hexrows }
-			// 		</div>
-			// 		<div className='ascfield'>
-			// 			{ ascrows }
-			// 		</div>
-			// 	</div>
-			// );
-
-			// let rows = _.chunk(file, 16).map(
-			// 	row => <div>{ row.map(octet => octet) }</div>
-			// );
-			//
-			// return (
-			// 	<div>
-			// 		{ rows }
-			// 	</div>
-			// );
 		}
 		return null;
 	}
