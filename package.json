@@ -1,0 +1,23 @@
+{
+  "name": "hexose",
+  "version": "0.0.1",
+  "description": "A next-generation hex editor.",
+  "main": "index.js",
+  "scripts": {
+    "test": ":"
+  },
+  "keywords": [
+    "hex",
+    "editor",
+    "hexose"
+  ],
+  "author": "synchronous",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^5.5.8",
+    "flummox": "^3.5.2",
+    "lodash": "^3.9.3",
+    "react": "^0.13.3",
+    "react-document-title": "^1.0.2"
+  }
+}
